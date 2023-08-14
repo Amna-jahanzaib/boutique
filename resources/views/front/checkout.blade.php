@@ -116,11 +116,20 @@
                         <ul class="list-unstyled mb-0">
                             @php $total=0; @endphp
                             @foreach(Auth::user()->cart as $cart_item)
+                            @php $flag=0; @endphp
+                            @if(isset($cart_item->customization))
+                            @php  $arr=json_decode($cart_item->customization, TRUE)@endphp
+
+                            @if(in_array('dupatta',$arr))
+                            @php  $flag=60;@endphp
+                            @endif
+                            @endif
+
                             <li class="d-flex align-items-center justify-content-between"><strong
                                     class="small fw-bold">{{$cart_item->product->name}}</strong><span
-                                    class="text-muted small">${{$cart_item->product->selling_price*$cart_item->quantity}}</span></li>
+                                    class="text-muted small">${{$cart_item->product->selling_price*$cart_item->quantity+($flag / 100) *$cart_item->product->selling_price}}</span></li>
                             <li class="border-bottom my-2"></li>
-                            @php $total+=$cart_item->product->selling_price*$cart_item->quantity; @endphp
+                            @php $total+=$cart_item->product->selling_price*$cart_item->quantity+($flag / 100) *$cart_item->product->selling_price; @endphp
 
                             @endforeach
                             <li class="d-flex align-items-center justify-content-between"><strong

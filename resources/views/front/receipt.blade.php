@@ -61,7 +61,7 @@
                         <div class="col-md-6 text-right">
                             <p class="font-weight-bold mb-4">Payment Details</p>
                             <p class="mb-1"><span class="text-muted">Payment ID: </span> PAYMENT_{{ $payment->id ?? '' }}</p>
-                            <p class="mb-1"><span class="text-muted">Stripe Charge Id: </span> {{ $payment->charge_id ?? '' }}</p>
+                            <p class="mb-1"><span class="text-muted">Order Id: </span> {{ $payment->order->tracking_no ?? '' }}</p>
                             <p class="mb-1"><span class="text-muted">Payment Type: </span> {{ $payment->type ?? '' }}</p>
                             <p class="mb-1"><span class="text-muted">Name: </span> {{ $payment->user->name ?? '' }}</p>
                         </div>
@@ -74,9 +74,6 @@
                                     <tr>
                                     <th class="border-0 text-uppercase small font-weight-bold">#
                         </th>
-                        <th class="border-0 text-uppercase small font-weight-bold">
-                        Booking ID
-                        </th>
                         
                         <th class="border-0 text-uppercase small font-weight-bold">
                         Product Category
@@ -84,13 +81,20 @@
                         <th class="border-0 text-uppercase small font-weight-bold">
                         Product Name
                         </th>
+                        
                         <th class="border-0 text-uppercase small font-weight-bold">
                         Quantity
                         </th>
                         <th class="border-0 text-uppercase small font-weight-bold">
+                        Size
+                        </th>
+                        <th class="border-0 text-uppercase small font-weight-bold">
+                        Customization
+                        </th>
+                        <th class="border-0 text-uppercase small font-weight-bold">
                         Product Amount
                         </th>
-                                    </tr>
+                        </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($payment->order->products as $key=> $product)
@@ -107,6 +111,22 @@
                                         </td>
                                         <td>
                                         {{ $product->pivot->quantity ?? '' }}
+                                        </td>
+                                        <td>
+                                        {{ App\Models\Product::SIZE_SELECT[$product->pivot->size] }}
+
+                                        
+                                        </td>
+                                        <td>
+                                        @if(isset($product->pivot->customization))
+                     @foreach(json_decode($product->pivot->customization) as $key=>$item)
+                     <div class="form-text" id="emailHelp">{{ App\Models\Product::CUSTOM_SELECT[$key] }}: {{ App\Models\Product::OPTION_SELECT[$item] }}</div>
+                    
+                     @endforeach
+                     @else
+                    None
+                     @endif
+                                        
                                         </td>
                                         <td>
                                         ${{ $product->pivot->price ?? '' }}

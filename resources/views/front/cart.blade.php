@@ -31,32 +31,63 @@
                       <th class="border-0 p-3" scope="col"> <strong class="text-sm text-uppercase">Product</strong></th>
                       <th class="border-0 p-3" scope="col"> <strong class="text-sm text-uppercase">Price</strong></th>
                       <th class="border-0 p-3" scope="col"> <strong class="text-sm text-uppercase">Quantity</strong></th>
+                      <th class="border-0 p-3" scope="col"> <strong class="text-sm text-uppercase">Size</strong></th>
+                      <th class="border-0 p-3" scope="col"> <strong class="text-sm text-uppercase">Customizations</strong></th>
                       <th class="border-0 p-3" scope="col"> <strong class="text-sm text-uppercase">Total</strong></th>
                       <th class="border-0 p-3" scope="col"> <strong class="text-sm text-uppercase"></strong></th>
                     </tr>
                   </thead>
                   <tbody class="border-0">
-                    @php $total=0; @endphp
+                    @php $total=0;  @endphp
                     @foreach(Auth::user()->cart as $cart_item)
+                    @php $flag=0; @endphp
                     <tr>
                       <th class="ps-0 py-3 border-light" scope="row">
-                        <div class="d-flex align-items-center"><a class="reset-anchor d-block animsition-link" href="{{route('product.details',$cart_item->product->id)}}"><img src="{{$cart_item->product->photo->getUrl('thumb')}}" alt="..." width="70"/></a>
-                          <div class="ms-3"><strong class="h6"><a class="reset-anchor animsition-link" href="{{route('product.details',$cart_item->product->id)}}">{{$cart_item->product->name}}</a></strong></div>
+
+                        <div class="d-flex align-items-center">
+                          <div class="row">
+                          <div class="col-md-12 ">
+                          <a class="reset-anchor d-block animsition-link" href="{{route('product.details',$cart_item->product->id)}}"><img src="{{$cart_item->product->photo->getUrl('thumb')}}" alt="..." width="70"/></a>
+                          </div>
+                          <div class="col-md-12">
+                          <div class="ms-3"><strong class="h6"><a class="reset-anchor animsition-link" href="{{route('product.details',$cart_item->product->id)}}"><br/><div>
+                            {{$cart_item->product->name}}</div></a>
+                          </strong>
+                        </div>
+                          </div>
+                          </div>
+                          
+                          
                         </div>
                       </th>
                       <td class="p-3 align-middle border-light">
                         <p class="mb-0 small">${{$cart_item->product->selling_price}}</p>
                       </td>
                       <td class="p-3 align-middle border-light">
-                        <div class="border d-flex align-items-center justify-content-between px-3"><span class="small text-uppercase text-gray headings-font-family">Quantity</span>
-                        <div class="quantity">
-                            <input class="form-control border-0 shadow-0 p-0" type="number" disabled min="1" max="{{$cart_item->product->quantity}}" value="{{$cart_item->quantity}}" name="quantity" >
-                          </div>
-                      </div>
+                        
+                        {{$cart_item->quantity}}
                       </td>
                       <td class="p-3 align-middle border-light">
-                        <p class="mb-0 small">${{$cart_item->product->selling_price*$cart_item->quantity}}</p>
-                        @php $total+=$cart_item->product->selling_price*$cart_item->quantity; @endphp
+                      {{ App\Models\Product::SIZE_SELECT[$cart_item->size] }}
+                      </td>
+                      <td class="p-3 align-middle border-light">
+                     @if(isset($cart_item->customization))
+                     <br/>
+                     Customizations:
+                     @foreach(json_decode($cart_item->customization) as $key=>$item)
+                     <div class="form-text" id="emailHelp">{{ App\Models\Product::CUSTOM_SELECT[$key] }}: {{ App\Models\Product::OPTION_SELECT[$item] }}</div>
+                    @if($item=='dupatta')
+                    @php  $flag=60;@endphp
+                    @endif
+                     @endforeach
+                     @else
+                    None
+                     @endif
+
+                      </td>
+                      <td class="p-3 align-middle border-light">
+                        <p class="mb-0 small">${{$cart_item->product->selling_price*$cart_item->quantity+($flag / 100) *$cart_item->product->selling_price}} </p>
+                        @php $total+=$cart_item->product->selling_price*$cart_item->quantity+($flag / 100) *$cart_item->product->selling_price; @endphp
                       </td>
                       <td class="p-3 align-middle border-light"><a class="reset-anchor" href="{{route('delete.cart.item',$cart_item->id)}}">
                         

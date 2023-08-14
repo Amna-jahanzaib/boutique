@@ -100,8 +100,22 @@
                         </th>
                         <td>
                         @foreach($product->size as $key => $i)
-                                <span class="label label-primary">{{ App\Models\Product::SIZE_SELECT[$i] }}</span>
+                                <span class="badge badge-info">{{ App\Models\Product::SIZE_SELECT[$i] }}</span>
                             @endforeach
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Customization
+                        </th>
+                        <td>
+                            @if(isset($product->customization)>0)
+                        @foreach($product->customization as $key => $i)
+                                <span class="badge badge-primary">{{ App\Models\Product::CUSTOM_SELECT[$i] }}</span>
+                            @endforeach
+                            @else
+                            None
+                            @endif
                         </td>
                     </tr>
                     <tr>

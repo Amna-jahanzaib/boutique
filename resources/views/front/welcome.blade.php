@@ -63,12 +63,12 @@
           </header>
           @if(count($categories)==4)
           <div class="row">
-            <div class="col-md-4"><a class="category-item" href="{{route('products.category',$categories[0]->id)}}"><img class="img-fluid" src="{{ asset('img/cat-img-1.jpg') }}" alt=""/><strong class="category-item-title">{{$categories[0]->name}}</strong></a>
+            <div class="col-md-4"><a class="category-item" href="{{route('products.category',$categories[0]->id)}}"><img class="img-fluid" src="{{ asset('img/12.jpg') }}" alt=""/><strong class="category-item-title">{{$categories[0]->name}}</strong></a>
             </div>
-            <div class="col-md-4"><a class="category-item mb-4" href="{{route('products.category',$categories[1]->id)}}"><img class="img-fluid" src="{{ asset('img/cat-img-2.jpg') }}" alt=""/><strong class="category-item-title">{{$categories[1]->name}}</strong></a>
-            <a class="category-item" href="{{route('products.category',$categories[2]->id)}}"><img class="img-fluid" src="{{ asset('img/cat-img-3.jpg') }}" alt=""/><strong class="category-item-title">{{$categories[2]->name}}</strong></a>
+            <div class="col-md-4"><a class="category-item mb-4" href="{{route('products.category',$categories[1]->id)}}"><img class="img-fluid" src="{{ asset('img/2.jpg') }}" alt=""/><strong class="category-item-title">{{$categories[1]->name}}</strong></a>
+            <a class="category-item" href="{{route('products.category',$categories[2]->id)}}"><img class="img-fluid" style="height: 270px!important; width:100%" src="{{ asset('img/1.jpg') }}" alt=""/><strong class="category-item-title">{{$categories[2]->name}}</strong></a>
             </div>
-            <div class="col-md-4"><a class="category-item" href="{{route('products.category',$categories[3]->id)}}"><img class="img-fluid" style="height: 492px;" src="{{ asset('img/product-7.jpg') }}" alt=""/><strong class="category-item-title">{{$categories[3]->name}}</strong></a>
+            <div class="col-md-4"><a class="category-item" href="{{route('products.category',$categories[3]->id)}}"><img class="img-fluid"  src="{{ asset('img/4.jpg') }}" alt=""/><strong class="category-item-title">{{$categories[3]->name}}</strong></a>
             </div>
           </div>
           @endif
@@ -85,7 +85,7 @@
             <div class="col-xl-3 col-lg-4 col-sm-6">
               <div class="product text-center">
                 <div class="position-relative mb-3">
-                <div class="badge text-white {{$product->featured=='1'? 'bg-info':''}}">{{$product->featured=='1'? 'Featured':''}}</div><a class="d-block" href="{{route('product.details',$product->id)}}"><img style="width: 400px; height:290px" class="img-fluid w-100" src="{{ $product->photo->getUrl() }}" alt="..."></a>
+                <div class="badge text-white  {{$product->featured=='1'? 'bg-info':''}}">{{$product->featured=='1'? 'Featured':''}}</div><a class="d-block" href="{{route('product.details',$product->id)}}"><img  class="img-fluid w-100" src="{{ $product->photo->getUrl() }}" style="width: 115%!important; height:290px" alt="..."></a>
                   <div class="product-overlay">
                   <form action="{{ route('add.to.cart',$product->id) }}" method="POST">
                       @csrf

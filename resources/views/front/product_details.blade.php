@@ -99,17 +99,86 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-sm-3 pl-sm-0"><button class="btn btn-dark btn-sm btn-block h-100 d-flex align-items-center justify-content-center px-3" type="submit">Add to cart</button></div>              </form>
+                <div class="col-sm-3 pl-sm-0"><button class="btn btn-dark btn-sm btn-block h-100 d-flex align-items-center justify-content-center px-3" type="submit">Add to cart</button></div>              
+              
 
               </div>
               <a class="text-dark p-0 mb-4 d-inline-block" href="{{route('add.to.wishlist',$product->id)}}"><i class="far fa-heart me-2"></i>Add to wish list</a><br>
               <ul class="list-unstyled small d-inline-block">
                 <li class="px-3 py-2 mb-1 bg-white"><strong class="text-uppercase">Short Description:</strong><span class="ms-2 text-muted">{{$product->small_description}}</span></li>
-                <li class="px-3 py-2 mb-1 bg-white text-muted"><strong class="text-uppercase text-dark">Category:</strong><a class="reset-anchor ms-2" href="#!">{{$product->category->name}}</a></li>
-                <li class="px-3 py-2 mb-1 bg-white text-muted"><strong class="text-uppercase text-dark">Available items:</strong><a class="reset-anchor ms-2" href="#!">{{$product->quantity}}</a></li>
-                <li class="px-3 py-2 mb-1 bg-white text-muted"><strong class="text-uppercase text-dark">Available Sizes:</strong><a class="reset-anchor ms-2" href="#!">@foreach($product->size as $key => $i)<span class="px-1 btn-info">{{ App\Models\Product::SIZE_SELECT[$i] }}</span>  @endforeach</a></li>
+                @if(isset($product->customization))
+                @foreach($product->customization as $id => $item)
+                <li class="px-3 py-2 mb-1 bg-white text-muted">
+                  <div class="row mb-3">
+                    <label class="col-sm-6 col-form-label" for="inputEmail3"><strong class="text-uppercase text-dark">{{App\Models\Product::CUSTOM_SELECT[$item]}}:</strong></label>
+                    <div class="col-sm-6">
+                        <select name="{{$item}}" id="{{$item}}" class="form-control reset-anchor ms-2" required>
+                        @if($item=='add_sleeve')
+                        @foreach(App\Models\Product::ADD_SLEEEVE_SELECT  as $id => $val)
+                        <option value="{{$id}}" > {{$val}}</option>
+                        @endforeach
+                        @endif
+
+                        @if($item=='top_length')
+                        @foreach(App\Models\Product::TOP_LENGTH_SELECT  as $id => $val)
+                        <option value="{{$id}}" > {{$val}}</option>
+                        @endforeach
+                        @endif
+                        
+                        @if($item=='bottom_length')
+                        @foreach(App\Models\Product::BOTTOM_LENGTH_SELECT  as $id => $val)
+                        <option value="{{$id}}" > {{$val}}</option>
+                        @endforeach
+                        @endif
+                        
+                        @if($item=='add_dupatta')
+                        @foreach(App\Models\Product::ADD_DUPATTA_SELECT  as $id => $val)
+                        <option value="{{$id}}" > {{$val}} ${{(60 / 100) *$product->selling_price}}</option>
+                        @endforeach
+                        @endif
+                        
+                        @if($item=='add_trousers')
+                        @foreach(App\Models\Product::ADD_TROUSERS_SELECT  as $id => $val)
+                        <option value="{{$id}}" > {{$val}}</option>
+                        @endforeach
+                        @endif
+                        
+                        @if($item=='add_lining')
+                        @foreach(App\Models\Product::ADD_LINING_SELECT  as $id => $val)
+                        <option value="{{$id}}" > {{$val}}</option>
+                        @endforeach
+                        @endif
+                        
+                        @if($item=='saree_length')
+                        @foreach(App\Models\Product::SAREE_LENGTH_SELECT  as $id => $val)
+                        <option value="{{$id}}" > {{$val}}</option>
+                        @endforeach
+                        @endif
+                        
+                        @if($item=='choli_length')
+                        @foreach(App\Models\Product::CHOLI_LENGTH_SELECT  as $id => $val)
+                        <option value="{{$id}}" > {{$val}}</option>
+                        @endforeach
+                        @endif
+                        
+                        </select>
+                      </div>
+                    </div>  
+                </li>
+                @endforeach
+                @endif
+
+                <li class="px-3 py-2 mb-1 bg-white text-muted"><strong class="text-uppercase text-dark">Available Sizes:</strong><a class="reset-anchor ms-2" href="#!">
+                  @foreach($product->size as $key => $i)
+                  <input class="form-check-input" id="gridRadios1" type="radio" name="size" value="{{$key}}" checked>
+                      <label class="form-check-label" for="gridRadios1">
+                      {{ App\Models\Product::SIZE_SELECT[$i] }}
+                        
+                      </label>
+                  @endforeach</a></li>
               </ul>
             </div>
+          </form>
           </div>
           <!-- DETAILS TABS-->
           <ul class="nav nav-tabs border-0" id="myTab" role="tablist">

@@ -47,12 +47,22 @@ class CustomerController extends Controller
      */
     public function add_to_cart(Request $request, Product $product)
     {
+        $custom=$request->all();
+        array_splice($custom,0,1);
+        array_splice($custom,0,1);
+        array_pop($custom);
+
+        
+
         if(!in_array($product->id,Auth::user()->cart->unique('product_id')->pluck('product_id')->toArray())){
             $cart=new Cart();
         
             $cart->product_id=$product->id;
             $cart->user_id=Auth::user()->id;
             $cart->quantity=$request->quantity;
+            $cart->size=$request->size;
+            $cart->customization=json_encode($custom);
+            
             $cart->save();
     
         }
@@ -96,7 +106,14 @@ class CustomerController extends Controller
     {
         $total=0;
         foreach(Auth::user()->cart as $cart_item){
-            $total+=$cart_item->product->selling_price*$cart_item->quantity; 
+            $flag=0;
+            if(isset($cart_item->customization)){
+                $arr=json_decode($cart_item->customization, TRUE);
+                if(in_array('dupatta',$arr)){
+                    $flag=60;
+                }
+            }
+            $total+=$cart_item->product->selling_price*$cart_item->quantity+($flag / 100) *$cart_item->product->selling_price; 
         }
 
         $order=new Order();
@@ -119,12 +136,21 @@ class CustomerController extends Controller
 
 
         foreach(Auth::user()->cart as $cart_item){
+            $flag=0;
+            if(isset($cart_item->customization)){
+                $arr=json_decode($cart_item->customization, TRUE);
+                if(in_array('dupatta',$arr)){
+                    $flag=60;
+                }
+            }
 
             $order_product=new OrderProducts;
             $order_product->product_id=$cart_item->product->id;
             $order_product->order_id=$order->id;
             $order_product->quantity=$cart_item->quantity;
-            $order_product->price=$cart_item->product->selling_price;
+            $order_product->price=$cart_item->product->selling_price+($flag / 100) *$cart_item->product->selling_price;
+            $order_product->customization=$cart_item->customization;
+            $order_product->size=$cart_item->size;
             $order_product->save();
             $cart_item->delete();
 
