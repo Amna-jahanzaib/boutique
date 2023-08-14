@@ -86,7 +86,11 @@
                                         <button type="submit" style="background:none; border:none;"><i class="far fa-trash-alt "></i></button>
                                     </form>
                       </a>  </li>
-                      <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark" href="{{route('add.to.cart',$item->product->id)}}">Add to cart</a></li>
+                      <form action="{{ route('add.to.cart',$item->product->id) }}" method="POST">
+                      @csrf                        <input type="hidden" name="quantity" value="1"/>
+
+                      <li class="list-inline-item m-0 p-0"><button class="btn btn-sm btn-dark" type="submit">Add to cart</button></li>                                            </form>
+
                       <li class="list-inline-item mr-0"><a class="btn btn-sm btn-outline-dark" href="#a{{$item->product->id}}" data-bs-toggle="modal"><i class="fas fa-expand"></i></a></li>
                     </ul>
                   </div>
