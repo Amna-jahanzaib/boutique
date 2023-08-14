@@ -33,7 +33,7 @@
         
         <div class="faq-item">
             <p class="question">Q: Can I return or exchange items?</p>
-            <p>A: Yes, we have a 30-day return and exchange policy. Please review our <a href="returns.html">Returns & Exchanges</a> page for more details.</p>
+            <p>A: Yes, we have a 30-day return and exchange policy. Please review our <a href="{{route('refund')}}">Returns & Exchanges</a> page for more details.</p>
         </div>
         
         <div class="faq-item">

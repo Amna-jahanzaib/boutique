@@ -40,7 +40,7 @@
 
                 <h3 class="profile-username text-center">{{ $user->name }}</h3>
 
-                <p class="text-muted text-center">Vendor</p>
+                <p class="text-muted text-center">{{$user->roles[0]->title}}</p>
 
 
 

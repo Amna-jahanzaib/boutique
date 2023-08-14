@@ -28,14 +28,14 @@ class Product extends Model implements HasMedia
     ];
 
     const CUSTOM_SELECT = [
-        'add_sleeve' => 'ADD Sleeves',
-        'top_length' => 'ADD Top Length',
-        'bottom_length' => 'ADD Bottom Length',
-        'add_dupatta' => 'ADD Dupatta',
-        'add_trousers' => 'ADD Trousers',
-        'choli_length' => 'ADD Choli Length',
-        'saree_length' => 'ADD Saree Length',
-        'add_lining' => 'ADD Lining',
+        'add_sleeve' => 'Sleeves',
+        'top_length' => 'Top Length',
+        'bottom_length' => 'Bottom Length',
+        'add_dupatta' => 'Dupatta',
+        'add_trousers' => 'Trousers',
+        'choli_length' => 'Choli Length',
+        'saree_length' => 'Saree Length',
+        'add_lining' => 'Lining',
 
     ];
 

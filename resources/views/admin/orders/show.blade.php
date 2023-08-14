@@ -1,23 +1,23 @@
 @extends('layouts.admin')
 @section('content')
 <section class="content-header">
-      <div class="row mb-2">
+    <div class="row mb-2">
         <div class="col-sm-6">
-        <h3>Show Order Details</h3>
+            <h3>Show Order Details</h3>
         </div>
         <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="{{route('admin.orders.index')}}">Orders</a></li>
-            <li class="breadcrumb-item active">Order Details</li>
-          </ol>
+            <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="{{route('admin.orders.index')}}">Orders</a></li>
+                <li class="breadcrumb-item active">Order Details</li>
+            </ol>
         </div>
-      </div>
-  </section>
-  <!-- Main content -->
+    </div>
+</section>
+<!-- Main content -->
 
 <div class="card">
     <div class="card-header">
-        {{ trans('global.show') }} Order 
+        {{ trans('global.show') }} Order
     </div>
 
     <div class="card-body">
@@ -26,7 +26,7 @@
                 <tbody>
                     <tr>
                         <th>
-                           Order ID
+                            Order ID
                         </th>
                         <td>
                             {{ $order->id }}
@@ -34,7 +34,7 @@
                     </tr>
                     <tr>
                         <th>
-                           Total Amount
+                            Total Amount
                         </th>
                         <td>
                             {{ $order->total_amount }}
@@ -42,7 +42,7 @@
                     </tr>
                     <tr>
                         <th>
-                           Payment Mode
+                            Payment Mode
                         </th>
                         <td>
                             {{ $order->total_amount }}
@@ -59,10 +59,10 @@
                     </tr>
                 </tbody>
             </table>
-            
+
         </div>
 
-        
+
     </div>
 </div>
 <div class="card">
@@ -85,47 +85,68 @@
                             Order No
                         </th>
                         <th>
-                        Product Category
+                            Product Category
                         </th>
                         <th>
-                        Product Name
+                            Product Name
                         </th>
-                        
+
                         <th>
-                        Quantity
+                            Quantity
                         </th>
                         <th>
-                        Product Amount
+                            Size
                         </th>
-                        
+                        <th>
+                            Customization
+                        </th>
+                        <th>
+                            Product Amount
+                        </th>
+
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($order->products as $product)
-                                    <tr>
-                                    <td></td>
-                                    <td>{{ $order->id ?? '' }}</td>
-                                        <td>
-                                        {{ $order->tracking_no ?? '' }}
-                                        </td>
-                                        <td>
-                                        {{ $product->category->name ?? '' }}
-                                        </td>
-                                        <td>
-                                        {{ $product->name ?? '' }}
-                                        </td>
-                                        <td>
-                                        {{ $product->pivot->quantity ?? '' }}
-                                        </td>
-                                        <td>
-                                        ${{ $product->pivot->price ?? '' }}
-                                        </td>
-                                    </tr>@endforeach
+                    @foreach($order->products as $product)
+                    <tr>
+                        <td></td>
+                        <td>{{ $order->id ?? '' }}</td>
+                        <td>
+                            {{ $order->tracking_no ?? '' }}
+                        </td>
+                        <td>
+                            {{ $product->category->name ?? '' }}
+                        </td>
+                        <td>
+                            {{ $product->name ?? '' }}
+                        </td>
+                        <td>
+                            {{ $product->pivot->quantity ?? '' }}
+                        </td>
+                        <td>
+                            {{ App\Models\Product::SIZE_SELECT[$product->pivot->size] }}
+                        </td>
+                        <td>
+                            @if(isset($product->pivot->customization))
+                            @foreach(json_decode($product->pivot->customization) as $key=>$item)
+                            <div class="form-text" id="emailHelp">{{ App\Models\Product::CUSTOM_SELECT[$key] }}:
+                                {{ App\Models\Product::OPTION_SELECT[$item] }}</div>
+
+                            @endforeach
+                            @else
+                            None
+                            @endif
+                        </td>
+                        <td>
+                            ${{ $product->pivot->price ?? '' }}
+                        </td>
+                    </tr>@endforeach
                 </tbody>
             </table>
             <a style="margin-top:20px;" class="btn btn-default" href="{{ url()->previous() }}">
                 {{ trans('global.back_to_list') }}
-            </a>        </div>
+            </a>
+        </div>
     </div>
 </div>
 

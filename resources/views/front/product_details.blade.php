@@ -110,7 +110,7 @@
                 @foreach($product->customization as $id => $item)
                 <li class="px-3 py-2 mb-1 bg-white text-muted">
                   <div class="row mb-3">
-                    <label class="col-sm-6 col-form-label" for="inputEmail3"><strong class="text-uppercase text-dark">{{App\Models\Product::CUSTOM_SELECT[$item]}}:</strong></label>
+                    <label class="col-sm-6 col-form-label" for="inputEmail3"><strong class="text-uppercase text-dark">Add {{App\Models\Product::CUSTOM_SELECT[$item]}}:</strong></label>
                     <div class="col-sm-6">
                         <select name="{{$item}}" id="{{$item}}" class="form-control reset-anchor ms-2" required>
                         @if($item=='add_sleeve')

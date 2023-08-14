@@ -37,7 +37,7 @@
                         <p>We offer exchanges for items of the same value. If you need to exchange an item, please
                             contact our customer support team.</p>
                         <p><strong>Contact Us:</strong></p>
-                        <address><strong>Fashion Boutique, Inc.</strong><br> 123 Fashion Avenue,P<br> San Francisco, CA
+                        <address><strong>Fashion Boutique, Inc.</strong><br> 123 Fashion Avenue<br> San Francisco, CA
                             94107<br><abbr title="Phone">Phone:</abbr> (123) 456-7890</address>
                         <address class="col-6"><strong>Email</strong><br>
 

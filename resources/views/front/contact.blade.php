@@ -27,9 +27,9 @@
           <div class="row">
             <div class="col-lg-4 mb-12 mb-lg-0">
             <div class="card mb-4" id="content-formatting">
-              <div class="card-header">Content Formatting</div>
+              <div class="card-header">Company Address</div>
               <div class="card-body">
-                <address><strong>Twitter, Inc.</strong><br> 123 Fashion Avenue,P<br> San Francisco, CA 94107<br><abbr title="Phone">Phone:</abbr> (123) 456-7890</address>
+                <address><strong>Fashion Boutique, Inc.</strong><br> 123 Fashion Avenue<br> San Francisco, CA 94107<br><abbr title="Phone">Phone:</abbr> (123) 456-7890</address>
                 <address class="col-6"><strong>Email</strong><br>
                 
                 <a href="mailto:#">info@fashionboutique.com</a></address>
