@@ -23,6 +23,8 @@
                     <h2 class="h4">{{$item->product->name}}</h2>
                     <p class="text-muted">${{$item->product->selling_price}}</p>
                     <p class="text-sm mb-4">{{$item->product->description}}</p>
+                    <form action="{{ route('add.to.cart',$item->product->id) }}" method="POST">
+                    @csrf
                     <div class="row align-items-stretch mb-4 gx-0">
                       <div class="col-sm-7">
                         <div class="border d-flex align-items-center justify-content-between py-1 px-3"><span class="small text-uppercase text-gray mr-4 no-select">Quantity</span>
@@ -33,9 +35,10 @@
                           </div>
                         </div>
                       </div>
-                      <div class="col-sm-5"><a class="btn btn-dark btn-sm w-100 h-100 d-flex align-items-center justify-content-center px-0" href="{{route('add.to.cart',$item->product->id)}}">Add to cart</a></div>
-                    </div><a class="btn btn-link text-dark text-decoration-none p-0" href="{{route('add.to.wishlist',$item->product->id)}}"><i class="far fa-heart me-2"></i>Add to wish list</a>
-                  </div>
+                      <div class="col-sm-5"><button type="submit" class="btn btn-dark btn-sm w-100 h-100 d-flex align-items-center justify-content-center px-0" >Add to cart</button></div>
+                    </div>
+                    </form>
+                </div>
                 </div>
               </div>
             </div>
