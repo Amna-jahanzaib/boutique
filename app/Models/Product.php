@@ -131,6 +131,7 @@ class Product extends Model implements HasMedia
         'churidar' => 'Churidar',
         'straigth' => 'Straigth Pant',
         'dupatta' => 'Dupatta',
+        'no_dupatta' => 'No Dupatta',
         'full_suit' => 'Full Lining including sleeves',
         'pajama' => 'Pajama',
         '14' => '14 inches',

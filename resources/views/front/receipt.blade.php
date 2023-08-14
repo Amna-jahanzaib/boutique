@@ -100,9 +100,7 @@
                                     @foreach($payment->order->products as $key=> $product)
                                     <tr>
                                         <td>{{$key+1}}</td>
-                                        <td>
-                                        {{ $payment->order->tracking_no ?? '' }}
-                                        </td>
+                                        
                                         <td>
                                         {{ $product->category->name ?? '' }}
                                         </td>
@@ -118,7 +116,7 @@
                                         
                                         </td>
                                         <td>
-                                        @if(isset($product->pivot->customization))
+                                        @if(isset($product->pivot->customization) )
                      @foreach(json_decode($product->pivot->customization) as $key=>$item)
                      <div class="form-text" id="emailHelp">{{ App\Models\Product::CUSTOM_SELECT[$key] }}: {{ App\Models\Product::OPTION_SELECT[$item] }}</div>
                     

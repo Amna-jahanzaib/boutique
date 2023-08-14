@@ -133,7 +133,8 @@
                         
                         @if($item=='add_dupatta')
                         @foreach(App\Models\Product::ADD_DUPATTA_SELECT  as $id => $val)
-                        <option value="{{$id}}" > {{$val}} ${{(60 / 100) *$product->selling_price}}</option>
+
+                        <option value="{{$id}}" > {{$val}}  @if($id=='dupatta')${{(60 / 100) *$product->selling_price}}@endif</option>
                         @endforeach
                         @endif
                         

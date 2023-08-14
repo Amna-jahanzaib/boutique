@@ -89,7 +89,7 @@
                                         
                                         </td>
                                         <td>
-                                        @if(isset($product->pivot->customization))
+                                        @if(isset($product->pivot->customization) )
                      @foreach(json_decode($product->pivot->customization) as $key=>$item)
                      <div class="form-text" id="emailHelp">{{ App\Models\Product::CUSTOM_SELECT[$key] }}: {{ App\Models\Product::OPTION_SELECT[$item] }}</div>
                     

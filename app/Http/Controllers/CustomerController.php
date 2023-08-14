@@ -60,7 +60,9 @@ class CustomerController extends Controller
             $cart->product_id=$product->id;
             $cart->user_id=Auth::user()->id;
             $cart->quantity=$request->quantity;
-            $cart->size=$request->size;
+            if($cart->size){
+                $cart->size=$request->size;
+            }
             $cart->customization=json_encode($custom);
             
             $cart->save();
@@ -150,7 +152,9 @@ class CustomerController extends Controller
             $order_product->quantity=$cart_item->quantity;
             $order_product->price=$cart_item->product->selling_price+($flag / 100) *$cart_item->product->selling_price;
             $order_product->customization=$cart_item->customization;
-            $order_product->size=$cart_item->size;
+            if($cart_item->size){
+                $order_product->size=$cart_item->size;
+            }
             $order_product->save();
             $cart_item->delete();
 

@@ -71,9 +71,8 @@
                       {{ App\Models\Product::SIZE_SELECT[$cart_item->size] }}
                       </td>
                       <td class="p-3 align-middle border-light">
-                     @if(isset($cart_item->customization))
+                     @if(isset($cart_item->customization) )
                      <br/>
-                     Customizations:
                      @foreach(json_decode($cart_item->customization) as $key=>$item)
                      <div class="form-text" id="emailHelp">{{ App\Models\Product::CUSTOM_SELECT[$key] }}: {{ App\Models\Product::OPTION_SELECT[$item] }}</div>
                     @if($item=='dupatta')
